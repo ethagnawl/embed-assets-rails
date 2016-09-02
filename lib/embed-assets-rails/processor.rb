@@ -60,9 +60,12 @@ module Saulabs::EmbedAssets
     # save it so that we don't have to compute it again later.
     def embeddable?(asset_path)
       font = EMBED_FONTS.include?(asset_path.extname)
+      puts asset_path.to_s.match(EMBEDDABLE) && asset_path.exist?
       return false unless asset_path.to_s.match(EMBEDDABLE) && asset_path.exist?
       return false unless EMBED_EXTS.include?(asset_path.extname)
+      puts EMBED_EXTS.include?(asset_path.extname)      
       return false unless font || encoded_contents(asset_path).length < MAX_IMAGE_SIZE
+      puts font || encoded_contents(asset_path).length < MAX_IMAGE_SIZE      
       return true
     end
 
